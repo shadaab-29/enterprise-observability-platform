@@ -1,0 +1,14 @@
+global:
+  resolve_timeout: 5m
+
+route:
+  receiver: google-chat
+  group_wait: 10s
+  group_interval: 30s
+  repeat_interval: 1h
+
+receivers:
+  - name: google-chat
+    webhook_configs:
+      - url: <GOOGLE_CHAT_WEBHOOK>
+        send_resolved: true

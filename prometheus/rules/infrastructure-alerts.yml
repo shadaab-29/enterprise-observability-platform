@@ -1,0 +1,83 @@
+groups:
+
+- name: resources
+
+  rules:
+
+  #################################################################
+  # PROXMOX NODE CPU
+  #################################################################
+
+  - alert: ProxmoxHighCPU
+    expr: (pve_cpu_usage_ratio{id=~"node/.*"} * 100) > 75
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: Proxmox High CPU Usage
+      description: "{{ $labels.id }} CPU usage is {{ printf \"%.2f\" $value }}%"
+
+  #################################################################
+  # PROXMOX NODE MEMORY
+  #################################################################
+
+  - alert: ProxmoxHighMemory
+    expr: ((pve_memory_usage_bytes{id=~"node/.*"} / pve_memory_size_bytes{id=~"node/.*"}) * 100) > 75
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: Proxmox High Memory Usage
+      description: "{{ $labels.id }} memory usage exceeded 75%"
+
+  #################################################################
+  # PROXMOX NODE DISK
+  #################################################################
+
+  - alert: ProxmoxHighDisk
+    expr: ((pve_disk_usage_bytes{id=~"node/.*"} / pve_disk_size_bytes{id=~"node/.*"}) * 100) > 75
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: Proxmox High Disk Usage
+      description: "{{ $labels.id }} disk usage exceeded 75%"
+
+  #################################################################
+  # VM CPU
+  #################################################################
+
+  - alert: VMHighCPU
+    expr: (pve_cpu_usage_ratio{id=~"qemu/.*"} * 100) > 75
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: VM High CPU Usage
+      description: "{{ $labels.id }} CPU usage is {{ printf \"%.2f\" $value }}%"
+
+  #################################################################
+  # VM MEMORY
+  #################################################################
+
+  - alert: VMHighMemory
+    expr: ((pve_memory_usage_bytes{id=~"qemu/.*"} / pve_memory_size_bytes{id=~"qemu/.*"}) * 100) > 75
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: VM High Memory Usage
+      description: "{{ $labels.id }} memory usage exceeded 75%"
+
+  #################################################################
+  # VM DISK
+  #################################################################
+
+  - alert: VMHighDisk
+    expr: ((pve_disk_usage_bytes{id=~"qemu/.*"} / pve_disk_size_bytes{id=~"qemu/.*"}) * 100) > 75
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: VM High Disk Usage
+      description: "{{ $labels.id }} disk usage exceeded 75%"

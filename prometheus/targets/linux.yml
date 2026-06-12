@@ -1,0 +1,35 @@
+- targets:
+    - <PROXMOX_NODE_01_IP>:9100
+  labels:
+    hostname: proxmox-node-01
+    role: proxmox
+
+- targets:
+    - <PROXMOX_NODE_02_IP>:9100
+  labels:
+    hostname: proxmox-node-02
+    role: proxmox
+
+- targets:
+    - <PROXMOX_NODE_03_IP>:9100
+  labels:
+    hostname: proxmox-node-03
+    role: proxmox
+
+- targets:
+    - <LINUX_SERVER_01_IP>:9100
+  labels:
+    hostname: linux-server-01
+    role: physical
+
+- targets:
+    - <LINUX_SERVER_02_IP>:9100
+  labels:
+    hostname: linux-server-02
+    role: physical
+
+- targets:
+    - <MONITORING_SERVER_IP>:9100
+  labels:
+    hostname: monitoring-server
+    role: monitoring
